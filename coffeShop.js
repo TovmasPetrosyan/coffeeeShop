@@ -23,5 +23,44 @@ class CoffeShop {
         } else{
           return  "All orders have been fulfilled"
         }
-    }; 
+    }
+
+    
+    dueAmount () {
+      return this.menu.reduce((acc, item) => acc + item.price, 0);
+    }
+
+    cheapestItem (){
+       let cheapest = this.menu.reduce((acc,item) => (item.price < acc.price) ? acc = item : acc, this.menu[0] )
+       return cheapest.name
+    }
 }
+
+
+    const menu = [
+        {
+          name: 'coca_cola',
+          type: 'drink',
+          price: 2.4,
+        },
+        {
+          name: 'pizza',
+          type: 'food',
+          price: 3,
+        },
+        {
+          name: 'cheese',
+          type: 'food',
+          price: 1.8,
+        },
+        {
+          name: 'coffee',
+          type: 'drink',
+          price: 2,
+        },
+      ]
+
+    let greatShop = new CoffeShop("greatShop", menu);
+    console.log(greatShop)
+    console.log(greatShop.dueAmount())
+    conso
