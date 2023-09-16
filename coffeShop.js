@@ -32,8 +32,17 @@ class CoffeShop {
 
     cheapestItem (){
        let cheapest = this.menu.reduce((acc,item) => (item.price < acc.price) ? acc = item : acc, this.menu[0] )
-       return cheapest.name
+       return `${cheapest.name} is the cheapest item`;
     }
+
+    drinksOnly(){
+        return this.menu.filter(item => item.type === "drink");
+    }
+
+    foodsOnly(){
+        return this.menu.filter(item => item.type === "food");
+    }
+
 }
 
 
@@ -62,5 +71,8 @@ class CoffeShop {
 
     let greatShop = new CoffeShop("greatShop", menu);
     console.log(greatShop)
-    console.log(greatShop.dueAmount())
-    conso
+    console.log(greatShop.dueAmount());
+    console.log(greatShop.cheapestItem());
+    console.log(greatShop.drinksOnly());
+    console.log(greatShop.foodsOnly());
+
