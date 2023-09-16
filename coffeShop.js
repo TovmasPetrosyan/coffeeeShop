@@ -5,20 +5,23 @@ class CoffeShop {
     this.orders = [];
    }
 
-  addOrder(name) {
-    if(this.menu.length !== 0){
-        this.menu.push(name);
-    } else {
-        return "This item is currently unavailable!"
-    }
+  addOrder(orderingFood) {
+    this.menu.forEach(function(item) {
+        if(item.name === orderingFood) {
+            this.orders.push(item);
+            return "Order added!";
+        } else {
+            return "This item is currently unavailable!"
+        }
+    })
+    };
 
     fulfillOrder() {
         if(this.orders.length !== 0){
-            return "The {item} is ready!"
+            const readyOrder = this.orders.unshift();
+            return `The ${readyOrder} is ready!`
         } else{
           return  "All orders have been fulfilled"
         }
-    }
-    
-  } 
+    }; 
 }
