@@ -1,48 +1,51 @@
 class CoffeShop {
-   constructor (name, menu) {
+    constructor(name, menu) {
         this.name = name;
         this.menu = menu;
         this.orders = [];
+        this._orderObjects = []
     }
 
-  addOrder(orderingFood) {
-    this.orders.forEach(function(item) {
+    addOrder(orderingFood) {
+        this.menu.forEach(item=> {
+            console.log(item)
             if (item.name === orderingFood) {
-                this.orders.push(item);
+                this._orderObjects.push(item);
+                this.orders.push(item.name)
                 return "Order added!";
-            } else {
-                return "This item is currently unavailable!"
             }
         })
+        return "This item is currently unavailable!"
     };
 
     fulfillOrder() {
-        if (this.orders.length !== 0) {
+        if (this.orders.length!==0) {
             const readyOrder = this.orders.unshift();
+            this._orderObjects.unshift();
             return `The ${readyOrder} is ready!`;
         } else {
-            return  "All orders have been fulfilled";
+            return "All orders have been fulfilled";
         }
     }
 
     listOrders() {
         return this.orders;
     }
-    
+
     dueAmount() {
-        return this.orders.reduce((acc, item) => acc + item.price, 0);
+        return this._orderObjects.reduce((acc, item) => acc + item.price, 0);
     }
 
     cheapestItem() {
-       let cheapest = this.menu.reduce((acc,item) => (item.price < acc.price) ? acc = item : acc, this.menu[0] )
-       return `${cheapest.name} is the cheapest item`;
+        let cheapest = this.menu.reduce((acc, item) => (item.price < acc.price) ? item : acc, this.menu[0])
+        return `${cheapest.name} is the cheapest item`;
     }
 
-    drinksOnly(){
+    drinksOnly() {
         return this.menu.filter(item => item.type === "drink");
     }
 
-    foodsOnly(){
+    foodsOnly() {
         return this.menu.filter(item => item.type === "food");
     }
 }
