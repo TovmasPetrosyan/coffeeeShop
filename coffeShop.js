@@ -7,19 +7,19 @@ class CoffeShop {
     }
 
     addOrder(orderingFood) {
-        this.menu.forEach(item=> {
-            console.log(item)
+        let t=false;
+        this.menu.forEach(item => {
             if (item.name === orderingFood) {
                 this._orderObjects.push(item);
                 this.orders.push(item.name)
-                return "Order added!";
+                t=true;
             }
         })
-        return "This item is currently unavailable!"
+        return t?"Order added!":"This item is currently unavailable!";
     };
 
     fulfillOrder() {
-        if (this.orders.length!==0) {
+        if (this.orders.length !== 0) {
             const readyOrder = this.orders.unshift();
             this._orderObjects.unshift();
             return `The ${readyOrder} is ready!`;
@@ -79,6 +79,7 @@ let tcs = new CoffeShop("greatShop", menu);
 console.log(tcs)
 console.log(tcs.addOrder('burger'));
 console.log(tcs.addOrder('coca_cola'));
+console.log(tcs)
 console.log(tcs.dueAmount());
 console.log(tcs.cheapestItem());
 console.log(tcs.drinksOnly());
