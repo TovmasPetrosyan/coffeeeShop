@@ -71,13 +71,13 @@ const menu = [
     },
 ]
 
-let greatShop = new CoffeShop("greatShop", menu);
+let tcs = new CoffeShop("greatShop", menu);
 
-console.log(greatShop)
-console.log(greatShop.addOrder('burger'));
-console.log(greatShop.addOrder('cola'));
-console.log(greatShop.dueAmount());
-console.log(greatShop.cheapestItem());
-console.log(greatShop.drinksOnly());
-console.log(greatShop.foodsOnly());
+console.log(tcs)
+console.log(tcs.addOrder('burger'));
+console.log(tcs.addOrder('coca_cola'));
+console.log(tcs.dueAmount());
+console.log(tcs.cheapestItem());
+console.log(tcs.drinksOnly());
+console.log(tcs.foodsOnly());
 
