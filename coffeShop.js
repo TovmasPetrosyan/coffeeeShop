@@ -76,12 +76,12 @@ const menu = [
 
 let tcs = new CoffeShop("greatShop", menu);
 
-console.log(tcs)
-console.log(tcs.addOrder('burger'));
-console.log(tcs.addOrder('coca_cola'));
-console.log(tcs)
-console.log(tcs.dueAmount());
-console.log(tcs.cheapestItem());
-console.log(tcs.drinksOnly());
-console.log(tcs.foodsOnly());
+// console.log(tcs)
+// console.log(tcs.addOrder('burger'));
+// console.log(tcs.addOrder('coca_cola'));
+// console.log(tcs)
+// console.log(tcs.dueAmount());
+// console.log(tcs.cheapestItem());
+// console.log(tcs.drinksOnly());
+// console.log(tcs.foodsOnly());
 
