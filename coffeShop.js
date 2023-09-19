@@ -1,87 +1,96 @@
-class CoffeShop {
-    constructor(name, menu) {
-        this.name = name;
-        this.menu = menu;
-        this.orders = [];
-        this._orderObjects = []
+class CoffeeShop {
+  constructor(name, menu) {
+    this.name = name;
+    this.menu = menu;
+  }
+
+  #orders = [];
+  #dueAmount = 0;
+
+  addOrder(productName) {
+    const currentItem = this.menu.find(({ name }) => name === productName);
+
+    if (currentItem) {
+      this.#orders.push(currentItem);
+      this.#dueAmount += currentItem.price;
+
+      return "Succesfully added!";
     }
 
-    addOrder(orderingFood) {
-        let t=false;
-        this.menu.forEach(item => {
-            if (item.name === orderingFood) {
-                this._orderObjects.push(item);
-                this.orders.push(item.name)
-                t=true;
-            }
-        })
-        return t?"Order added!":"This item is currently unavailable!";
-    };
+    return `This item is currently unavailable! ${this.name}'s coffee shop does not sell ${item}`;
+  }
 
-    fulfillOrder() {
-        if (this.orders.length !== 0) {
-            const readyOrder = this.orders.unshift();
-            this._orderObjects.unshift();
-            return `The ${readyOrder} is ready!`;
-        } else {
-            return "All orders have been fulfilled";
-        }
+  fulfillOrder() {
+    if (this.#orders.length) {
+      let { name, price } = this.orders.shift();
+      this.#dueAmount -= price;
+
+      return `The ${name} is ready!`;
     }
 
-    listOrders() {
-        return this.orders;
-    }
+    return `All orders have been fulfilled!`;
+  }
 
-    dueAmount() {
-        return this._orderObjects.reduce((acc, item) => acc + item.price, 0);
-    }
+  dueAmount() {
+    return this.#dueAmount;
+  }
 
-    cheapestItem() {
-        let cheapest = this.menu.reduce((acc, item) => (item.price < acc.price) ? item : acc, this.menu[0])
-        return `${cheapest.name} is the cheapest item`;
-    }
+  listOrders() {
+    return this.#orders.map(({ name }) => name);
+  }
 
-    drinksOnly() {
-        return this.menu.filter(item => item.type === "drink");
-    }
+  cheapestItem() {
+    const { name } = this.menu.reduce((acc, curr) =>
+      acc.price < curr.price ? acc : curr
+    );
 
-    foodsOnly() {
-        return this.menu.filter(item => item.type === "food");
-    }
+    return name;
+  }
+
+  drinksOnly() {
+    return this.menu.reduce((acc, item) => {
+      if (item.type === "drink") {
+        acc.push(item.name);
+      }
+      return acc;
+    }, []);
+  }
+
+  foodOnly() {
+    return this.menu.reduce((acc, item) => {
+      if (item.type === "food") {
+        acc.push(item.name);
+      }
+      return acc;
+    }, []);
+  }
 }
 
-
 const menu = [
-    {
-        name: 'coca_cola',
-        type: 'drink',
-        price: 2.4,
-    },
-    {
-        name: 'pizza',
-        type: 'food',
-        price: 3,
-    },
-    {
-        name: 'cheese',
-        type: 'food',
-        price: 1.8,
-    },
-    {
-        name: 'coffee',
-        type: 'drink',
-        price: 2,
-    },
-]
+  {
+    name: "coca_cola",
+    type: "drink",
+    price: 20,
+  },
+  {
+    name: "pizza",
+    type: "food",
+    price: 30,
+  },
+  {
+    name: "cheese",
+    type: "food",
+    price: 18,
+  },
+  {
+    name: "coffee",
+    type: "drink",
+    price: 25,
+  },
+];
 
-let tcs = new CoffeShop("greatShop", menu);
-
-// console.log(tcs)
-// console.log(tcs.addOrder('burger'));
-// console.log(tcs.addOrder('coca_cola'));
-// console.log(tcs)
-// console.log(tcs.dueAmount());
-// console.log(tcs.cheapestItem());
-// console.log(tcs.drinksOnly());
-// console.log(tcs.foodsOnly());
-
+const Jazzve = new CoffeeShop("Jazzve", menu);
+console.log(Jazzve.addOrder("coffee"));
+console.log(Jazzve.dueAmount());
+console.log(Jazzve.drinksOnly());
+console.log(Jazzve.foodOnly());
